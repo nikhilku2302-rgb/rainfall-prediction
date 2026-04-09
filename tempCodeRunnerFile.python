@@ -1,0 +1,14 @@
+from flask import Flask, request, render_template
+import ml
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    result = ""
+    if request.method == "POST":
+        data = request.form["input"]
+        result = model.predict(data)
+    return render_template("index.html", result=result)
+
+app.run(debug=True)
